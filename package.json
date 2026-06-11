@@ -1,0 +1,37 @@
+{
+  "name": "pattern-principal",
+  "version": "1.0.0",
+  "description": "AI Agent skills for writing clean, principled production code — GoF, SOLID, YAGNI, DRY",
+  "author": "chiggosVikash",
+  "license": "MIT",
+  "homepage": "https://github.com/chiggosVikash/pattern_principal#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chiggosVikash/pattern_principal.git"
+  },
+  "keywords": [
+    "claude",
+    "ai-agent",
+    "skill",
+    "design-patterns",
+    "solid",
+    "clean-code",
+    "gof",
+    "yagni",
+    "dry"
+  ],
+  "bin": {
+    "pattern-principal": "./bin/cli.js"
+  },
+  "scripts": {
+    "install-skill": "node ./bin/cli.js install"
+  },
+  "files": [
+    "bin/",
+    "clean-code-agent/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

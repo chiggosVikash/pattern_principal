@@ -1,56 +1,76 @@
-# pattern_principal
+# pattern-principal
 
 > AI Agent skills for writing clean, principled production code.
 
-A collection of Claude AI agent skills that enforce software engineering best practices — automatically, consistently, across every language.
+Installable skill collection that enforces **GoF Design Patterns**, **SOLID**, **YAGNI**, and **DRY** while your AI agent writes or reviews code.
+
+**Languages:** TypeScript · Python · Dart · Rust · Go · Java · C++
 
 ---
 
-## Skills
+## Quick Start
 
-### [`clean-code-agent`](./clean-code-agent/SKILL.md)
+```bash
+# Install a skill
+npx pattern-principal install clean-code-agent
+
+# Install all skills
+npx pattern-principal install --all
+
+# List available skills
+npx pattern-principal list
+
+# Get info on a skill
+npx pattern-principal info clean-code-agent
+
+# Uninstall
+npx pattern-principal uninstall clean-code-agent
+```
+
+Skills are installed to `~/.claude/skills/` on your machine.
+
+---
+
+## Available Skills
+
+### `clean-code-agent`
 
 An AI coding skill that enforces:
 
 | Principle | Coverage |
 |-----------|----------|
 | **GoF Design Patterns** | Top 10 patterns with "when to use" signals |
-| **SOLID** | All 5 principles with violation detection & fixes |
+| **SOLID** | All 5 principles — violation detection & fixes |
 | **YAGNI** | Over-engineering detection with pragmatic exceptions |
-| **DRY** | 4 types of duplication with extraction strategies |
-
-**Languages:** TypeScript · Python · Dart · Rust · Go · Java · C++
-
-**Modes:**
-- **WRITE mode** — guides code generation inline with Decision Comments
-- **REVIEW mode** — produces structured review reports with severity ratings
+| **DRY** | 4 duplication types with extraction strategies |
 
 ---
 
-## How to Use
+## Using After Install
 
-### In Claude (claude.ai)
+### 1. Claude.ai Projects
+Open a Project → **Custom Instructions** → paste the contents of:
+```
+~/.claude/skills/clean-code-agent/SKILL.md
+```
 
-1. Copy the [`clean-code-agent/SKILL.md`](./clean-code-agent/SKILL.md) content
-2. Paste it into a Claude Project's custom instructions
-3. Claude will now enforce all principles while writing or reviewing your code
+### 2. Claude Code
+Add to your `CLAUDE.md` in project root:
+```
+Read and follow ~/.claude/skills/clean-code-agent/SKILL.md
+```
 
-### As a Reference
-
-Browse the `references/` folder directly:
-
-| File | Use For |
-|------|---------|
-| [`references/gof-patterns.md`](./clean-code-agent/references/gof-patterns.md) | Pattern examples in 7 languages |
-| [`references/solid-checklist.md`](./clean-code-agent/references/solid-checklist.md) | SOLID violation detection & fixes |
-| [`references/yagni-dry-rules.md`](./clean-code-agent/references/yagni-dry-rules.md) | Over-engineering & duplication rules |
-| [`references/review-template.md`](./clean-code-agent/references/review-template.md) | Structured code review format |
+### 3. Any AI Agent / System Prompt
+Reference the installed skill path:
+```
+~/.claude/skills/clean-code-agent/SKILL.md
+```
 
 ---
 
 ## Decision Comment Format
 
-When the skill applies a principle, it annotates code with:
+When the skill is active, your AI agent annotates code inline:
 
 ```typescript
 // [PATTERN: Strategy] — behavior varies by type; avoids if/else chain
@@ -61,12 +81,22 @@ When the skill applies a principle, it annotates code with:
 
 ---
 
+## Two Modes
+
+- **WRITE mode** — guides code generation with inline annotations
+- **REVIEW mode** — produces structured reports with severity ratings (`CRITICAL` / `MAJOR` / `MINOR` / `SUGGESTION`)
+
+---
+
 ## Folder Structure
 
 ```
 pattern_principal/
+├── package.json
+├── bin/
+│   └── cli.js                      ← installer CLI
 └── clean-code-agent/
-    ├── SKILL.md                    ← main skill file (start here)
+    ├── SKILL.md                    ← main skill file
     └── references/
         ├── gof-patterns.md         ← top 10 GoF patterns, 7 languages
         ├── solid-checklist.md      ← SOLID audit checklist + fixes
@@ -81,7 +111,7 @@ pattern_principal/
 PRs welcome for:
 - Additional GoF patterns (remaining 13)
 - New language examples
-- Real-world violation + fix case studies
+- More skills (e.g. `testing-agent`, `api-design-agent`)
 
 ---
 
