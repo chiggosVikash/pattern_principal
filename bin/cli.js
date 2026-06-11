@@ -213,8 +213,50 @@ function getIDETargets(skillName, skillContent) {
       ],
     },
 
+    // ── Antigravity (Google DeepMind) ─────────────────────────────────────────
+    // Rule hierarchy (highest → lowest priority):
+    //   1. GEMINI.md       — Antigravity-specific overrides (project root)
+    //   2. AGENTS.md       — cross-tool shared rules (project root)
+    //   3. .antigravity/rules.md — workspace supplement rules
+    //   4. ~/.gemini/GEMINI.md  — global rules (all projects)
+    //
+    // NOTE: ~/.gemini/GEMINI.md is shared with Gemini CLI — a known conflict.
+    // We install to GEMINI.md (project) + .antigravity/rules.md to stay clean.
+    antigravity: {
+      name: "Antigravity",
+      icon: "🪐",
+      detect: () =>
+        fs.existsSync(path.join(home, ".gemini")) ||
+        fs.existsSync("/Applications/Antigravity.app") ||
+        fs.existsSync(path.join(home, "AppData", "Local", "Programs", "Antigravity", "Antigravity.exe")) ||
+        fs.existsSync(path.join(cwd, ".antigravity")),
+      targets: [
+        {
+          label: "project (GEMINI.md — Antigravity-specific, highest priority)",
+          type: "append-file",
+          dest: path.join(cwd, "GEMINI.md"),
+          content: `\n\n<!-- pattern-principal: ${skillName} -->\n${skillContent}`,
+          postInstall: `Antigravity reads GEMINI.md first — these rules take top priority.`,
+        },
+        {
+          label: "project (.antigravity/rules.md — workspace supplement)",
+          type: "append-file",
+          dest: path.join(cwd, ".antigravity", "rules.md"),
+          content: `\n\n<!-- pattern-principal: ${skillName} -->\n${skillContent}`,
+          postInstall: `Loaded as workspace supplement rules by Antigravity agent.`,
+        },
+        {
+          label: "global (~/.gemini/GEMINI.md — applies to ALL projects)",
+          type: "append-file",
+          dest: path.join(home, ".gemini", "GEMINI.md"),
+          content: `\n\n<!-- pattern-principal: ${skillName} -->\n<!-- NOTE: also read by Gemini CLI -->\n${skillContent}`,
+          postInstall: `Global rules. ⚠️  ~/.gemini/GEMINI.md is shared with Gemini CLI — see README for workaround.`,
+        },
+      ],
+    },
+
     // ── AGENTS.md (universal standard) ───────────────────────────────────────
-    // Works with: Cline, Copilot, Zed, Aider, and any AGENTS.md-compatible tool
+    // Works with: Cline, Copilot, Zed, Aider, Antigravity, and any AGENTS.md-compatible tool
     agentsmd: {
       name: "AGENTS.md (Universal)",
       icon: "🌐",
@@ -467,6 +509,8 @@ function cmdIDEs() {
     ["cline",      "🔷", "Cline (global)",     "~/.cline/rules/<skill>.md",                    "global"],
     ["zed",        "⚡", "Zed",               "AGENTS.md or ~/.config/zed/AGENTS.md",          "both"],
     ["continue",   "▶️", "Continue.dev",       ".continue/rules/<skill>.md",                   "project"],
+    ["antigravity","🪐", "Antigravity",        "GEMINI.md + .antigravity/rules.md",             "project"],
+    ["antigravity","🪐", "Antigravity (global)","~/.gemini/GEMINI.md",                          "global"],
     ["agentsmd",   "🌐", "AGENTS.md",          "AGENTS.md (universal standard)",               "project"],
   ];
 
@@ -494,7 +538,7 @@ function cmdHelp() {
   console.log(`  ${cyan("npx pattern-principal uninstall <skill> --ide windsurf")}  Remove from one IDE`);
   console.log();
   console.log(bold("  Supported IDEs\n"));
-  console.log(`  ${["claudecode","cursor","windsurf","copilot","cline","zed","continue","agentsmd"].join("  ")}\n`);
+  console.log(`  ${["claudecode","cursor","windsurf","copilot","cline","zed","continue","antigravity","agentsmd"].join("  ")}\n`);
 }
 
 // ─── Router ───────────────────────────────────────────────────────────────────
