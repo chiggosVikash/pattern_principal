@@ -2,7 +2,7 @@
 
 > AI Agent skills for writing clean, principled production code.
 
-Installable skill collection that enforces **GoF Design Patterns**, **SOLID**, **YAGNI**, and **DRY** while your AI agent writes or reviews code.
+Installable skill collection enforcing **GoF Design Patterns**, **SOLID**, **YAGNI**, and **DRY** — across every major AI IDE and coding agent.
 
 **Languages:** TypeScript · Python · Dart · Rust · Go · Java · C++
 
@@ -11,31 +11,48 @@ Installable skill collection that enforces **GoF Design Patterns**, **SOLID**, *
 ## Quick Start
 
 ```bash
-# Install a skill
+# Auto-detect your installed IDEs and install
 npx pattern-principal install clean-code-agent
 
-# Install all skills
-npx pattern-principal install --all
+# Install for a specific IDE
+npx pattern-principal install clean-code-agent --ide cursor
+npx pattern-principal install clean-code-agent --ide cursor,windsurf
+
+# Install for ALL supported IDEs at once
+npx pattern-principal install clean-code-agent --ide all
+
+# See all supported IDEs and their rule file locations
+npx pattern-principal ides
 
 # List available skills
 npx pattern-principal list
-
-# Get info on a skill
-npx pattern-principal info clean-code-agent
 
 # Uninstall
 npx pattern-principal uninstall clean-code-agent
 ```
 
-Skills are installed to `~/.claude/skills/` on your machine.
+---
+
+## Supported IDEs
+
+| IDE | Rule File Location | Scope | `--ide` flag |
+|-----|-------------------|-------|-------------|
+| 🤖 Claude Code | `~/.claude/skills/<skill>/` | global | `claudecode` |
+| ⬛ Cursor | `.cursor/rules/<skill>.mdc` | project | `cursor` |
+| 🌊 Windsurf | `.windsurf/rules/<skill>.md` | project | `windsurf` |
+| 🌊 Windsurf (global) | `~/.codeium/windsurf/memories/global_rules.md` | global | `windsurf` |
+| 🐙 GitHub Copilot | `.github/copilot-instructions.md` | project | `copilot` |
+| 🔷 Cline | `.clinerules/<skill>.md` | project | `cline` |
+| 🔷 Cline (global) | `~/.cline/rules/<skill>.md` | global | `cline` |
+| ⚡ Zed | `AGENTS.md` / `~/.config/zed/AGENTS.md` | both | `zed` |
+| ▶️ Continue.dev | `.continue/rules/<skill>.md` | project | `continue` |
+| 🌐 AGENTS.md | `AGENTS.md` (universal standard) | project | `agentsmd` |
 
 ---
 
 ## Available Skills
 
 ### `clean-code-agent`
-
-An AI coding skill that enforces:
 
 | Principle | Coverage |
 |-----------|----------|
@@ -44,33 +61,20 @@ An AI coding skill that enforces:
 | **YAGNI** | Over-engineering detection with pragmatic exceptions |
 | **DRY** | 4 duplication types with extraction strategies |
 
+**Two modes:** WRITE (inline annotations while coding) · REVIEW (structured reports with severity ratings)
+
 ---
 
-## Using After Install
+## How Auto-Detection Works
 
-### 1. Claude.ai Projects
-Open a Project → **Custom Instructions** → paste the contents of:
-```
-~/.claude/skills/clean-code-agent/SKILL.md
-```
-
-### 2. Claude Code
-Add to your `CLAUDE.md` in project root:
-```
-Read and follow ~/.claude/skills/clean-code-agent/SKILL.md
-```
-
-### 3. Any AI Agent / System Prompt
-Reference the installed skill path:
-```
-~/.claude/skills/clean-code-agent/SKILL.md
-```
+Running `npx pattern-principal install <skill>` without `--ide` will:
+1. Scan your machine for installed IDEs (checks config dirs, app paths)
+2. Install to every detected IDE automatically
+3. Print exactly what was installed and where
 
 ---
 
 ## Decision Comment Format
-
-When the skill is active, your AI agent annotates code inline:
 
 ```typescript
 // [PATTERN: Strategy] — behavior varies by type; avoids if/else chain
@@ -81,20 +85,13 @@ When the skill is active, your AI agent annotates code inline:
 
 ---
 
-## Two Modes
-
-- **WRITE mode** — guides code generation with inline annotations
-- **REVIEW mode** — produces structured reports with severity ratings (`CRITICAL` / `MAJOR` / `MINOR` / `SUGGESTION`)
-
----
-
 ## Folder Structure
 
 ```
 pattern_principal/
 ├── package.json
 ├── bin/
-│   └── cli.js                      ← installer CLI
+│   └── cli.js                      ← multi-IDE installer CLI
 └── clean-code-agent/
     ├── SKILL.md                    ← main skill file
     └── references/
@@ -111,7 +108,8 @@ pattern_principal/
 PRs welcome for:
 - Additional GoF patterns (remaining 13)
 - New language examples
-- More skills (e.g. `testing-agent`, `api-design-agent`)
+- More skills (`testing-agent`, `api-design-agent`, `security-agent`)
+- Support for new IDEs
 
 ---
 
