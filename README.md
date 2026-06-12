@@ -10,26 +10,30 @@ Installable skill collection enforcing **GoF Design Patterns**, **SOLID**, **YAG
 
 ## Quick Start
 
+> **Note:** Not yet published to npm. Use the GitHub URL until then (works with Node 14+):
+
 ```bash
 # Auto-detect your installed IDEs and install
-npx pattern-principal install clean-code-agent
+npx github:chiggosVikash/pattern_principal install clean-code-agent
 
 # Install for a specific IDE
-npx pattern-principal install clean-code-agent --ide cursor
-npx pattern-principal install clean-code-agent --ide cursor,windsurf
+npx github:chiggosVikash/pattern_principal install clean-code-agent --ide cursor
+npx github:chiggosVikash/pattern_principal install clean-code-agent --ide cursor,windsurf
 
 # Install for ALL supported IDEs at once
-npx pattern-principal install clean-code-agent --ide all
+npx github:chiggosVikash/pattern_principal install clean-code-agent --ide all
 
 # See all supported IDEs and their rule file locations
-npx pattern-principal ides
+npx github:chiggosVikash/pattern_principal ides
 
 # List available skills
-npx pattern-principal list
+npx github:chiggosVikash/pattern_principal list
 
 # Uninstall
-npx pattern-principal uninstall clean-code-agent
+npx github:chiggosVikash/pattern_principal uninstall clean-code-agent
 ```
+
+Once published to npm, all commands will shorten to `npx pattern-principal <command>`.
 
 ---
 
