@@ -214,14 +214,17 @@ function getIDETargets(skillName, skillContent) {
     },
 
     // ── Antigravity (Google DeepMind) ─────────────────────────────────────────
-    // Rule hierarchy (highest → lowest priority):
-    //   1. GEMINI.md       — Antigravity-specific overrides (project root)
-    //   2. AGENTS.md       — cross-tool shared rules (project root)
-    //   3. .antigravity/rules.md — workspace supplement rules
-    //   4. ~/.gemini/GEMINI.md  — global rules (all projects)
+    // Full install locations (confirmed from Antigravity agent directly):
     //
-    // NOTE: ~/.gemini/GEMINI.md is shared with Gemini CLI — a known conflict.
-    // We install to GEMINI.md (project) + .antigravity/rules.md to stay clean.
+    //  RULES (auto-loaded, always active — no invocation needed):
+    //   1. GEMINI.md (project root)             — highest priority, Antigravity-specific
+    //   2. .antigravity/rules.md                — workspace supplement rules
+    //   3. ~/.gemini/GEMINI.md                  — global rules, all projects
+    //
+    //  SKILLS (slash commands → type /clean-code-agent in chat):
+    //   4. ~/.gemini/config/skills/<name>/      — global skills, available as / commands
+    //
+    // NOTE: ~/.gemini/GEMINI.md is shared with Gemini CLI (known conflict #16058)
     antigravity: {
       name: "Antigravity",
       icon: "🪐",
@@ -232,11 +235,11 @@ function getIDETargets(skillName, skillContent) {
         fs.existsSync(path.join(cwd, ".antigravity")),
       targets: [
         {
-          label: "project (GEMINI.md — Antigravity-specific, highest priority)",
+          label: "project (GEMINI.md — highest priority, always active)",
           type: "append-file",
           dest: path.join(cwd, "GEMINI.md"),
           content: `\n\n<!-- pattern-principal: ${skillName} -->\n${skillContent}`,
-          postInstall: `Antigravity reads GEMINI.md first — these rules take top priority.`,
+          postInstall: `Rules auto-loaded by Antigravity — no invocation needed, always enforced.`,
         },
         {
           label: "project (.antigravity/rules.md — workspace supplement)",
@@ -246,11 +249,17 @@ function getIDETargets(skillName, skillContent) {
           postInstall: `Loaded as workspace supplement rules by Antigravity agent.`,
         },
         {
+          label: "global skill (~/.gemini/config/skills/ — enables /${skillName} slash command)",
+          type: "copy-dir",
+          dest: path.join(home, ".gemini", "config", "skills", skillName),
+          postInstall: `Slash command installed! Type /${skillName} in Antigravity chat to trigger a manual review.`,
+        },
+        {
           label: "global (~/.gemini/GEMINI.md — applies to ALL projects)",
           type: "append-file",
           dest: path.join(home, ".gemini", "GEMINI.md"),
           content: `\n\n<!-- pattern-principal: ${skillName} -->\n<!-- NOTE: also read by Gemini CLI -->\n${skillContent}`,
-          postInstall: `Global rules. ⚠️  ~/.gemini/GEMINI.md is shared with Gemini CLI — see README for workaround.`,
+          postInstall: `Global rules active everywhere. ⚠️  Shared with Gemini CLI — see README for workaround.`,
         },
       ],
     },
