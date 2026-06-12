@@ -1,7 +1,7 @@
 {
   "name": "pattern-principal",
-  "version": "1.1.0",
-  "description": "AI Agent skills for writing clean, principled production code — GoF, SOLID, YAGNI, DRY",
+  "version": "1.2.0",
+  "description": "AI Agent skills for writing clean, principled production code \u2014 GoF, SOLID, YAGNI, DRY",
   "author": "chiggosVikash",
   "license": "MIT",
   "homepage": "https://github.com/chiggosVikash/pattern_principal#readme",

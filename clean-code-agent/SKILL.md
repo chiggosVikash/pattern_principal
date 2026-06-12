@@ -93,19 +93,32 @@ Load these on demand — do NOT load all at once:
 | `references/gof-patterns.md` | Choosing or applying a design pattern |
 | `references/solid-checklist.md` | Checking SOLID compliance of a class/module |
 | `references/yagni-dry-rules.md` | Checking for over-engineering or duplication |
+| `references/anti-patterns.md` | Detecting bad patterns in existing or new code |
 | `references/review-template.md` | Producing a structured code review report |
+| `references/languages/typescript.md` | Writing TypeScript — branded types, generics, async |
+| `references/languages/python.md` | Writing Python — idioms, type hints, dataclasses, ABCs |
+| `references/languages/dart.md` | Writing Dart — null safety, mixins, sealed classes |
+| `references/languages/rust.md` | Writing Rust — ownership, traits, enums, error handling |
+| `references/languages/go.md` | Writing Go — interfaces, error handling, concurrency |
+| `references/languages/java.md` | Writing Java — records, streams, sealed classes |
+| `references/languages/cpp.md` | Writing C++ — RAII, smart pointers, templates |
+
+**Loading rule:** Always load the language-specific guide when the target language is known.
+Load `anti-patterns.md` on every REVIEW mode task. Load others on demand.
 
 ---
 
 ## Language-Specific Notes
 
-- **TypeScript** — Use interfaces for DIP; prefer composition over inheritance; use generics for reuse
-- **Python** — Use ABCs (`abc.ABC`) for abstractions; dataclasses for value objects; `Protocol` for structural typing
-- **Dart** — Use abstract classes; mixins for shared behavior; factory constructors for GoF Factory
-- **Rust** — Use traits for abstraction (DIP); enums + match for Strategy; builder pattern via method chaining
-- **Go** — Use interfaces implicitly; embed structs for composition over inheritance; avoid deep hierarchies
-- **Java** — Full GoF support; use interfaces + generics; avoid God classes
-- **C++** — Use pure virtual classes for abstraction; RAII for resource management; templates for DRY
+Quick reference — load the full guide for details:
+
+- **TypeScript** — Branded types for IDs; discriminated unions for state; `Result<T,E>` over null returns
+- **Python** — List comprehensions; `Protocol` for duck typing; `dataclass(frozen=True)` for value objects
+- **Dart** — `const` constructors; factory constructors for GoF Factory; sealed classes + Result type
+- **Rust** — `?` operator for errors; traits for DIP; newtype pattern; exhaustive enum matching
+- **Go** — Small implicit interfaces; functional options pattern; table-driven tests; no global state
+- **Java** — Records for value objects; sealed classes for state; Optional on return types only
+- **C++** — RAII always; smart pointers only (no raw new/delete); `std::optional` over nullptr
 
 ---
 

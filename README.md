@@ -54,12 +54,14 @@ npx pattern-principal uninstall clean-code-agent
 
 ### `clean-code-agent`
 
-| Principle | Coverage |
-|-----------|----------|
+| Category | Coverage |
+|----------|----------|
 | **GoF Design Patterns** | Top 10 patterns with "when to use" signals |
 | **SOLID** | All 5 principles — violation detection & fixes |
 | **YAGNI** | Over-engineering detection with pragmatic exceptions |
 | **DRY** | 4 duplication types with extraction strategies |
+| **Anti-Pattern Detection** | 15 common anti-patterns — God Class, Spaghetti, Feature Envy, Shotgun Surgery, and more |
+| **Language Deep Guides** | TypeScript, Python, Dart, Rust, Go, Java, C++ — idiomatic patterns per language |
 
 **Two modes:** WRITE (inline annotations while coding) · REVIEW (structured reports with severity ratings)
 
