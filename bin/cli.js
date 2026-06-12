@@ -17,7 +17,7 @@ const magenta = (s) => `\x1b[35m${s}\x1b[0m`;
 // ─── Available Skills ─────────────────────────────────────────────────────────
 const SKILLS = {
   "clean-code-agent": {
-    description: "GoF patterns, SOLID, YAGNI, DRY, anti-pattern detection + 7 language deep guides",
+    description: "GoF patterns, SOLID, YAGNI, DRY, anti-pattern detection + 7 language deep guides + architecture patterns",
     languages: ["TypeScript", "Python", "Dart", "Rust", "Go", "Java", "C++"],
     files: [
       "SKILL.md",
@@ -25,6 +25,7 @@ const SKILLS = {
       "references/solid-checklist.md",
       "references/yagni-dry-rules.md",
       "references/anti-patterns.md",
+      "references/architecture-patterns.md",
       "references/review-template.md",
       "references/languages/typescript.md",
       "references/languages/python.md",
@@ -33,6 +34,17 @@ const SKILLS = {
       "references/languages/go.md",
       "references/languages/java.md",
       "references/languages/cpp.md",
+    ],
+  },
+  "testing-agent": {
+    description: "TDD, AAA, Mock/Stub/Spy/Fake, test naming, review — all languages",
+    languages: ["TypeScript", "Python", "Go", "Java", "Dart", "Rust"],
+    files: [
+      "SKILL.md",
+      "references/tdd-guide.md",
+      "references/test-patterns.md",
+      "references/mock-guide.md",
+      "references/review-template.md",
     ],
   },
 };
