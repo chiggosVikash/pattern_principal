@@ -47,6 +47,19 @@ const SKILLS = {
       "references/review-template.md",
     ],
   },
+  "db-design-agent": {
+    description: "Schema design, indexing, zero-downtime migrations, query patterns, NoSQL — PostgreSQL, MongoDB, Redis, DynamoDB, ClickHouse",
+    languages: ["SQL", "TypeScript", "Python", "Go", "Java"],
+    files: [
+      "SKILL.md",
+      "references/schema-design.md",
+      "references/indexing-guide.md",
+      "references/migration-patterns.md",
+      "references/query-patterns.md",
+      "references/nosql-patterns.md",
+      "references/review-template.md",
+    ],
+  },
 };
 
 // ─── IDE Target Definitions ───────────────────────────────────────────────────
