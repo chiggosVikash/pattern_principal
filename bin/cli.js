@@ -60,6 +60,20 @@ const SKILLS = {
       "references/review-template.md",
     ],
   },
+  "code-security-agent": {
+    description: "OWASP Top 10 defensive patterns — injection, access control, crypto, secrets, SSRF, API security",
+    languages: ["TypeScript", "Python", "Go", "Java"],
+    files: [
+      "SKILL.md",
+      "references/injection.md",
+      "references/auth-and-access.md",
+      "references/crypto-and-secrets.md",
+      "references/input-validation.md",
+      "references/dependency-and-config.md",
+      "references/api-security.md",
+      "references/review-template.md",
+    ],
+  },
 };
 
 // ─── IDE Target Definitions ───────────────────────────────────────────────────
